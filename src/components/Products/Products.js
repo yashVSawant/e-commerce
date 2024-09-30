@@ -1,6 +1,7 @@
 import React from "react";
 
 import Product from "./Product";
+import { Container ,Row ,Col} from "react-bootstrap";
 
 const Products = ()=>{
     const productsArr = [
@@ -46,10 +47,17 @@ const Products = ()=>{
         }
         
         ]
-    return (<ul>
-        <h2>Music</h2>
-        {productsArr.map((p,i)=><Product product={p} key={'product'+i}/>)}
-    </ul>)
+
+        const addToCartHandler = (id)=>{
+            console.log(id)
+        }
+    return (
+    <Container style={{paddingTop:"20vh"}}>
+            <Row className="justify-content-center">
+                <Col xs="auto" style={{margin:"10px"}}><h3>Music</h3></Col>
+            </Row>
+            <Row>{productsArr.map((p,i)=><Product product={p} key={'product'+i} onAddToCart={addToCartHandler}/>)}</Row>
+    </Container>)
 }
 
 export default Products;
