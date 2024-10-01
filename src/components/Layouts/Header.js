@@ -1,9 +1,10 @@
 import React from "react";
 import {Container, Navbar ,Nav } from "react-bootstrap";
 import CartButton from "../Cart/CartButton";
+import "../../styles/Header.css"
 
-const Header = ()=>{
-    return (<header style={{width:'100vw',position: "fixed" ,zIndex: 1000}}>
+const Header = (props)=>{
+    return (<header className="headers">
         <Navbar bg="dark" variant="dark" style={{height:"15vh" }}>
             <Container>
                 <Navbar.Brand href="/"><h1>The Generics</h1></Navbar.Brand>
@@ -14,7 +15,7 @@ const Header = ()=>{
                     <Nav.Link href="/store">Store</Nav.Link>
                     <Nav.Link href="/about">About</Nav.Link>
                 </Nav>
-                <CartButton/>
+                <CartButton onClick={props.onCartClick}/>
             </Container>
         </Navbar>
     </header>)

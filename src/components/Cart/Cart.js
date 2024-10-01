@@ -1,55 +1,45 @@
-import React from "react";
+import React,{useContext} from "react";
 
-import CartItem from "./CartItem"
+import CartItem from "./CartItem";
+import CartContext from "../Context/cart-Context";
 
-import {Container} from "react-bootstrap";
+import {Row ,Col, Button} from "react-bootstrap";
+import "../../styles/Cart.css"
 
-const Cart = ()=>{
-    const cartElements = [
-
-        {
-        
-        title: 'Colors',
-        
-        price: 100,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-        
-        quantity: 2,
-        
-        },
-        
-        {
-        
-        title: 'Black and white Colors',
-        
-        price: 50,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-        
-        quantity: 3,
-        
-        },
-        
-        {
-        
-        title: 'Yellow and Black Colors',
-        
-        price: 70,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-        
-        quantity: 1,
-        
-        }
-        
-        ]
+const Cart = (props)=>{
+    const cartContext = useContext(CartContext);
+    const cartProducts = cartContext.items;
+    const removeHandler = (id)=>{
+        cartContext.removeItem(id);
+    }
     return (
-        <Container>
-            <Row>
-                {cartElements.map((item)=><CartItem item={ietm}/>)}
-            </Row>
-        </Container>
+        <div className="cart-container" >
+            <header className="cart-header">
+                <Row><Col className="d-flex justify-content-center"><h2>Cart</h2></Col></Row>
+                <Row xs={4} style={{height:"10vh"}}>
+                    <Col xs={5} className="d-flex align-items-center"><h3>Item</h3></Col>
+                    <Col className="d-flex align-items-center"><h3>Price</h3></Col>
+                    <Col xs={4} className="d-flex align-items-center"><h3>Quantity</h3></Col>
+                </Row>
+            </header>
+            <div className="cart-items">
+                {cartProducts.map((item)=><CartItem item={item} onRemove={removeHandler}/>)}
+            </div>
+            <footer className="cart-bottom">
+                <Row >
+                    <Col>
+                        <p>Total: {cartContext.totalPrice}</p>
+                    </Col>
+                    <Col>
+                        <Button>Purchase</Button>
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                        <Button onClick={props.onCloseCart}>Close</Button>
+                    </Col>
+                </Row>
+            </footer>
+            
+        </div>
     )
 }
 

@@ -15,7 +15,7 @@ const Product = (props)=>{
             <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>{product.price}</Card.Text>
-                <Button variant="primary" onClick={onClickHandler(2)}>Add To Cart</Button>
+                <Button variant="primary" onClick={onClickHandler(product.id)}>Add To Cart</Button>
             </Card.Body>
         </Card>
     </Col>
