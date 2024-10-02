@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
+import { BrowserRouter as Router,Route,Routes , } from 'react-router-dom';
 import './App.css';
 import Header from './components/Layouts/Header';
-import Products from './components/Products/Products';
+import Home from './pages/Home';
+import About from './pages/About';
 import CartProvider from './components/Context/CartProvider';
 import Cart from './components/Cart/Cart';
 
@@ -14,9 +16,14 @@ function App() {
   }
   return (
     <CartProvider>
+      <Router>
       <Header onCartClick={cartHandler}/>
       {isCartOpne && <Cart onCloseCart={cartHandler}/>}
-      <Products/>
+        <Routes>
+          <Route path="/"  element={<Home/>} />
+          <Route path="/about"  element={<About/>} />
+        </Routes>
+      </Router>
     </CartProvider>
   );
 }
